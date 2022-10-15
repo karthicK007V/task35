@@ -1,0 +1,100 @@
+create table student(
+id int primary key auto_increment,
+name varchar(225),
+age int,
+email varchar(225),
+grade varchar(225)
+)
+
+
+
+
+insert into student (name,age,email,grade) values ("karthick",24,"aaa@gmail.com","A");
+insert into student (name,age,email,grade) values ("sathish",25,"bbb@gmail.com","B");
+insert into student (name,age,email,grade) values ("arun",26,"ccc@gmail.com","C");
+insert into student (name,age,email,grade) values ("kumar",27,"ddd@gmail.com","D");
+insert into student (name,age,email,grade) values ("nagaraj",28,"eee@gmail.com","A");
+insert into student (name,age,email,grade) values ("pandiyan",29,"fff@gmail.com","B");
+
+-- bolt
+
+-- 1.find function
+
+select * from student;
+ select * from teacher;
+
+select name from student;
+select age from student; 
+select email from student;
+select grade from student;
+
+-- 2.Queries with constraints (Pt. 1) 
+
+select * from student where id=5;
+
+select * from student where age between 18 and 25;
+
+select * from student where age not between 18 and 25;
+
+select * from student where grade like "A";
+
+select * from student where grade = "B";
+
+select * from student where grade !="B";
+
+select distinct grade from student order by name;
+
+select * from student  order by  id desc;
+
+select * from student order by grade desc limit 4 offset 2;
+
+update student set grade="G" where id=2;
+
+alter table student add column medium varchar(225) default "English";
+
+delete from student where id =6;
+
+drop table student;
+
+CREATE TABLE teacher (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(255),
+    experience INT,
+    Address VARCHAR(255),
+    Contact INT
+);
+INSERT INTO teacher (Name, experience, Address, Contact) VALUES ('RRR', 4, 'Chennai', 1245346534),
+ ('SSS', 8, 'Banglore', 943241324);
+ 
+ select * from teacher;
+ 
+ alter table student add column teacherid int;
+ alter table student add foreign key (teacherid) references teacher(id);
+ 
+ update student set teacherid=1 where id in (1,4,7);
+ update student set teacherid=2 where id in (2,3,5);
+ 
+--  inner join
+
+select * from 
+student as s
+inner join
+teacher as t on s.teacherid=t.id;
+
+-- left join
+
+select 
+s.id,t.id,t.address
+from
+student as s
+left join
+teacher as t on s.teacherid=t.id;
+
+-- right join
+
+select 
+s.id,s.name,s.grade,s.email,t.id,t.name,t.experience
+from
+student as s
+right join
+teacher as t on s.teacherid=t.id;teacher
